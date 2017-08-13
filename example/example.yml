@@ -1,0 +1,36 @@
+in:
+  type: file
+  path_prefix: example/example.tsv
+  parser:
+    type: csv
+    delimiter: "\t"
+    skip_header_lines: 1
+    columns:
+      - {name: json_payload, type: json}
+      - {name: married, type: boolean}
+      - {name: age, type: long}
+      - {name: bmi, type: double}
+      - {name: birthplace, type: string}
+      - {name: date_of_birth, type: timestamp, format: "%Y-%m-%d"}
+      - {name: other_info, type: json}
+filters:
+  - type: column_as_json_key
+    column: json_payload
+    column_to_be_added: married
+  - type: column_as_json_key
+    column: json_payload
+    column_to_be_added: age
+  - type: column_as_json_key
+    column: json_payload
+    column_to_be_added: bmi
+  - type: column_as_json_key
+    column: json_payload
+    column_to_be_added: birthplace
+  - type: column_as_json_key
+    column: json_payload
+    column_to_be_added: date_of_birth
+  - type: column_as_json_key
+    column: json_payload
+    column_to_be_added: other_info
+out:
+  type: stdout
